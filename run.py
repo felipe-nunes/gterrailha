@@ -1,5 +1,14 @@
 import tkinter as tk
 import random
+import os
+
+# Verifica se está rodando no Read the Docs
+on_read_the_docs = os.environ.get('READTHEDOCS') == 'True'
+
+# Importa tkinter apenas se não estiver no Read the Docs
+if not on_read_the_docs:
+    import tkinter as tk
+
 
 def logging_decorator(func):
     """Decorator para registrar o início e o fim da execução de uma função.
@@ -95,7 +104,12 @@ class ForbiddenIslandBoard:
         sinking_tiles (set): Conjunto de tiles afundando.
         treasure_names (list): Nomes dos tesouros.
     """
-    def __init__(self, root, grid_size=6, tile_size=110):
+    def __init__(self, root=None, grid_size=6, tile_size=110):
+        # Se estiver no Read the Docs, evita a execução do código tkinter
+        if on_read_the_docs:
+            print("Executando no Read the Docs, interface gráfica desativada.")
+            return
+        self.root = root
         self.root = root
         self.grid_size = grid_size
         self.tile_size = tile_size
@@ -156,13 +170,18 @@ class ForbiddenIslandBoard:
                         treasure_index += 1
                         self.canvas.create_text(x1 + self.tile_size/2, y1 + self.tile_size/2, text=treasure_name, fill='green', font=('Helvetica', 10, 'bold'))
 
-# Inicialização da janela principal do tkinter
-root = tk.Tk()
-root.title("Ilha Proibida Grid de Terrenos")
+# Código de execução principal
+if not on_read_the_docs:
+    # Inicialização da janela principal do tkinter
+    root = tk.Tk()
+    root.title("Ilha Proibida Grid de Terrenos")
 
-# Criação da instância da classe ForbiddenIslandBoard e desenho do grid
-board = ForbiddenIslandBoard(root)
-board.draw_grid()
+    # Criação da instância da classe ForbiddenIslandBoard e desenho do grid
+    board = ForbiddenIslandBoard(root)
+    board.draw_grid()
 
-# Execução do loop do tkinter
-root.mainloop()
+    # Execução do loop do tkinter
+    root.mainloop()
+else:
+    # Se estiver no Read the Docs, pode-se executar alguma lógica alternativa se necessário
+    pass
