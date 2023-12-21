@@ -15,7 +15,8 @@ on_read_the_docs = os.environ.get('READTHEDOCS') == 'True'
 
 if on_read_the_docs:
     # Define o diretório de saída para o Read the Docs
-    html_build_dir = os.path.join(os.environ.get('READTHEDOCS_OUTPUT', ''), 'html')
+    html_build_dir = os.path.join(os.environ.get('READTHEDOCS_OUTPUT', '.'), 'html')
+
 
 
 project = 'Ilha Proibida'
