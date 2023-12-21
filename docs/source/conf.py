@@ -43,5 +43,3 @@ on_rtd = os.environ.get('READTHEDOCS') == 'True'
 html_theme = 'sphinx_rtd_theme'
 if on_rtd:
     html_theme = 'default'
-
-html_static_path = ['_static']
