@@ -11,5 +11,5 @@ build:
     python: "3.11"
 
 # Set the builder to MkDocs
-sphinx:
+mkdocs:
   configuration: grupo_terra_ilha_proibida/mkdocs.yml
